@@ -9,7 +9,11 @@
 ![最佳语言](https://img.shields.io/github/languages/top/goexl/gox)
 ![星星个数](https://img.shields.io/github/stars/goexl/gox?style=social)
 
-项目介绍
+`Pulsar`客户端的简单封装，让用户更容易处理消息发送和接收，并在此过程中隐藏相关细节（比如Ack、序列化等），比如提供如下功能
+- 更易用的接口
+- 开放的消息序列化处理
+- 不关心细节
+  - `Ack`
 
 ## 捐助
 
