@@ -4,12 +4,12 @@ import (
 	"github.com/goexl/pulsar/internal/internal"
 )
 
-type Producer struct {
-	*internal.Connection
+type Producer[T any] struct {
+	*internal.Connection[T]
 }
 
-func NewProducer() *Producer {
-	return &Producer{
-		Connection: internal.NewConnection(),
+func NewProducer[T any]() *Producer[T] {
+	return &Producer[T]{
+		Connection: internal.NewConnection[T](),
 	}
 }

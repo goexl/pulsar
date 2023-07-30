@@ -3,31 +3,23 @@ package builder
 import (
 	"github.com/goexl/pulsar/internal/callback"
 	"github.com/goexl/pulsar/internal/param"
-	"github.com/goexl/pulsar/internal/serializer"
 	"github.com/goexl/pulsar/internal/worker"
 )
 
 type Send[T any] struct {
-	*Base
+	*Base[T]
 
 	param *param.Send[T]
-	send  callback.Send
+	get   callback.GetProducer[T]
 }
 
-func NewSend[T any](send callback.Send) *Send[T] {
+func NewSend[T any](get callback.GetProducer[T]) *Send[T] {
 	return &Send[T]{
-		Base: NewBase(),
+		Base: NewBase[T](),
 
-		param: param.NewSend[T](send),
-		send:  send,
+		param: param.NewSend[T](),
+		get:   get,
 	}
-}
-
-func (s *Send[T]) Encoder(encoder serializer.Encoder[T]) (send *Send[T]) {
-	s.param.Encoder = encoder
-	send = s
-
-	return
 }
 
 func (s *Send[T]) Key(key string) (send *Send[T]) {
@@ -44,6 +36,6 @@ func (s *Send[T]) Property(key string, value string) (send *Send[T]) {
 	return
 }
 
-func (s *Send[T]) Build() *worker.Send {
-	return worker.NewSend(s.param)
+func (s *Send[T]) Build() *worker.Send[T] {
+	return worker.NewSend[T](s.param, s.get)
 }

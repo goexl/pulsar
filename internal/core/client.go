@@ -21,6 +21,10 @@ func NewClient(param *param.Client) *Client {
 	}
 }
 
-func (c *Client) Consume(topic string) *builder.Handle[any] {
-	return builder.NewHandle()
+func (c *Client) Consumer(topic string) *builder.Consumer[any] {
+	return builder.NewConsumer[any](topic)
+}
+
+func (c *Client) Producer(topic string) *builder.Producer[any] {
+	return builder.NewProducer[any](topic)
 }

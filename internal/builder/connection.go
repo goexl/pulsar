@@ -4,12 +4,12 @@ import (
 	"github.com/goexl/pulsar/internal/internal"
 )
 
-type Connection struct {
-	param *internal.Connection
+type Connection[T any] struct {
+	param *internal.Connection[T]
 }
 
-func NewConnection() *Connection {
-	return &Connection{
-		param: internal.NewConnection(),
+func NewConnection[T any]() *Connection[T] {
+	return &Connection[T]{
+		param: internal.NewConnection[T](),
 	}
 }

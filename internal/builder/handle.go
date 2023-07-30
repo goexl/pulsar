@@ -2,24 +2,26 @@ package builder
 
 import (
 	"github.com/goexl/pulsar/internal/callback"
-	"github.com/goexl/pulsar/internal/core"
 	"github.com/goexl/pulsar/internal/param"
+	"github.com/goexl/pulsar/internal/worker"
 )
 
 type Handle[T any] struct {
-	*Connection[T]
+	*Base[T]
 
 	param *param.Handle[T]
+	get   callback.GetConsumer[T]
 }
 
-func NewHandle[T any](receive callback.Receive, ack callback.Ack, reconsume callback.Reconsume) *Handle[T] {
+func NewHandle[T any](get callback.GetConsumer[T]) *Handle[T] {
 	return &Handle[T]{
-		Connection: NewConnection[T](),
+		Base: NewBase[T](),
 
-		param: param.NewHandle[T](receive, ack, reconsume),
+		param: param.NewHandle[T](),
+		get:   get,
 	}
 }
 
-func (c *Handle[T]) Build() (*core.Handle[T], error) {
-	return core.NewHandle[T]()
+func (h *Handle[T]) Build() *worker.Handle[T] {
+	return worker.NewHandle[T](h.param, h.get)
 }

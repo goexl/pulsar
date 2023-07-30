@@ -5,13 +5,12 @@ import (
 )
 
 type Base[T any] struct {
-	Serializer serializer.Serializer[T]
-	Topic      string
-	Name       string
+	Encoder serializer.Encoder[T]
+	Decoder serializer.Decoder[T]
 }
 
 func NewBase[T any]() *Base[T] {
 	return &Base[T]{
-		Serializer: serializer.NewJson[T](),
+		Encoder: serializer.NewJson[T](),
 	}
 }
