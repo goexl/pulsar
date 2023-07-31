@@ -21,6 +21,13 @@ func (b *Builder) Region(region string) (client *Builder) {
 	return
 }
 
+func (b *Builder) Server(label string, url string) (client *Builder) {
+	b.param.Urls[label] = url
+	client = b
+
+	return
+}
+
 func (b *Builder) Build() *Client {
 	return NewClient(b.param)
 }

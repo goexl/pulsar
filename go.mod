@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/apache/pulsar-client-go v0.11.0
+	github.com/goexl/exc v0.0.5
 	github.com/goexl/gox v0.3.6
 	github.com/goexl/simaqian v0.2.5
 )
@@ -19,11 +20,11 @@ require (
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/danieljoos/wincred v1.2.0 // indirect
 	github.com/dvsekhvalnov/jose2go v1.5.0 // indirect
+	github.com/frankban/quicktest v1.14.5 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
-	github.com/google/go-cmp v0.5.9 // indirect
 	github.com/gsterjov/go-libsecret v0.0.0-20161001094733-a6f4afe4910c // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/linkedin/goavro/v2 v2.12.0 // indirect
