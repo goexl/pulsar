@@ -5,11 +5,15 @@ import (
 )
 
 type Producer[T any] struct {
-	*internal.Connection[T]
+	*internal.Connection
+	*internal.Base[T]
+
+	Topic string
 }
 
 func NewProducer[T any]() *Producer[T] {
 	return &Producer[T]{
-		Connection: internal.NewConnection[T](),
+		Connection: internal.NewConnection(),
+		Base:       internal.NewBase[T](),
 	}
 }

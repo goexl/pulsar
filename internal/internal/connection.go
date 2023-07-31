@@ -1,19 +1,16 @@
 package internal
 
-import (
-	"github.com/goexl/pulsar/internal/serializer"
-)
-
-type Connection[T any] struct {
-	Label   string
-	Topic   string
-	Name    string
-	Encoder serializer.Encoder[T]
-	Decoder serializer.Decoder[T]
+type Connection struct {
+	Label string
+	Name  string
 }
 
-func NewConnection[T any]() *Connection[T] {
-	return &Connection[T]{
+func NewConnection() *Connection {
+	return &Connection{
 		Label: DefaultLabel,
 	}
+}
+
+func (c *Connection) Key() string {
+	return c.Name
 }

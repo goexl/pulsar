@@ -7,7 +7,6 @@ import (
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
 	"github.com/goexl/pulsar/internal/callback"
-	"github.com/goexl/pulsar/internal/internal"
 	"github.com/goexl/pulsar/internal/message"
 	"github.com/goexl/pulsar/internal/param"
 	"github.com/goexl/simaqian"
@@ -16,9 +15,8 @@ import (
 type Handle[T any] struct {
 	simaqian.Logger
 
-	param      *param.Handle[T]
-	connection *internal.Connection[T]
-	get        callback.GetConsumer[T]
+	param *param.Handle[T]
+	get   callback.GetConsumer[T]
 }
 
 func NewHandle[T any](param *param.Handle[T], get callback.GetConsumer[T]) *Handle[T] {
@@ -29,7 +27,7 @@ func NewHandle[T any](param *param.Handle[T], get callback.GetConsumer[T]) *Hand
 }
 
 func (h *Handle[T]) Start(ctx context.Context, handler message.Handler[T]) (err error) {
-	if consumer, ge := h.get(h.connection); nil != ge {
+	if consumer, ge := h.get(h.param.Consumer); nil != ge {
 		err = ge
 	} else {
 		err = h.start(ctx, consumer, handler)
@@ -53,7 +51,7 @@ func (h *Handle[T]) process(ctx context.Context, consumer pulsar.Consumer, msg p
 	defer h.cleanup(consumer, msg, &err)
 
 	peek := handler.Peek()
-	decoder := gox.Ift(nil != h.param.Decoder, h.param.Decoder, h.connection.Decoder)
+	decoder := gox.Ift(nil != h.param.Decoder, h.param.Decoder, h.param.Base.Decoder)
 	if de := decoder.Decode(msg.Payload(), peek); nil != de {
 		err = de
 	} else {

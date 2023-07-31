@@ -4,9 +4,7 @@ go 1.19
 
 require (
 	github.com/apache/pulsar-client-go v0.11.0
-	github.com/aws/aws-sdk-go-v2 v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.4
-	github.com/goexl/exc v0.0.5
 	github.com/goexl/gox v0.3.6
 	github.com/goexl/simaqian v0.2.5
 )
@@ -17,6 +15,7 @@ require (
 	github.com/AthenZ/athenz v1.10.39 // indirect
 	github.com/DataDog/zstd v1.5.0 // indirect
 	github.com/ardielle/ardielle-go v1.5.2 // indirect
+	github.com/aws/aws-sdk-go-v2 v1.19.1 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.1.36 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.4.30 // indirect
 	github.com/aws/smithy-go v1.13.5 // indirect

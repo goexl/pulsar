@@ -2,12 +2,10 @@ package param
 
 import (
 	"time"
-
-	"github.com/goexl/pulsar/internal/internal"
 )
 
 type Handle[T any] struct {
-	*internal.Base[T]
+	*Consumer[T]
 
 	Max      uint32
 	Duration time.Duration
@@ -15,6 +13,6 @@ type Handle[T any] struct {
 
 func NewHandle[T any]() *Handle[T] {
 	return &Handle[T]{
-		Base: internal.NewBase[T](),
+		Consumer: NewConsumer[T](),
 	}
 }

@@ -1,12 +1,11 @@
 package param
 
 import (
-	"github.com/goexl/pulsar/internal/internal"
 	"github.com/goexl/pulsar/internal/serializer"
 )
 
 type Send[T any] struct {
-	*internal.Base[T]
+	*Producer[T]
 
 	Key        string
 	Properties map[string]string
@@ -16,7 +15,7 @@ type Send[T any] struct {
 
 func NewSend[T any]() *Send[T] {
 	return &Send[T]{
-		Base: internal.NewBase[T](),
+		Producer: NewProducer[T](),
 
 		Encoder: serializer.NewJson[T](),
 	}

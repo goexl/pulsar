@@ -2,7 +2,7 @@ package callback
 
 import (
 	"github.com/apache/pulsar-client-go/pulsar"
-	"github.com/goexl/pulsar/internal/internal"
+	"github.com/goexl/pulsar/internal/param"
 )
 
-type GetProducer[T any] func(connection *internal.Connection[T]) (pulsar.Producer, error)
+type GetProducer[T any] func(config *param.Producer[T]) (pulsar.Producer, error)

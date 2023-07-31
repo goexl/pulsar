@@ -1,4 +1,4 @@
-package core
+package message
 
 import (
 	"github.com/apache/pulsar-client-go/pulsar"

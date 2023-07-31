@@ -22,9 +22,9 @@ func (s *Send[T]) Encoder(encoder serializer.Encoder[T]) (send *Send[T]) {
 	return
 }
 
-func (b *Base[T]) Label(label string) (base *Base[T]) {
-	b.param.Label = label
-	base = b
+func (s *Send[T]) Decoder(decoder serializer.Decoder[T]) (send *Send[T]) {
+	s.param.Decoder = decoder
+	send = s
 
 	return
 }
