@@ -1,19 +1,28 @@
 package param
 
 import (
+	"sync"
+
 	"github.com/goexl/pulsar/internal/config"
-	"github.com/goexl/pulsar/internal/internal"
 )
 
 type Client struct {
-	Urls     map[string]string
-	Region   string
-	Timeout  config.Timeout
-	Provider internal.Provider
+	Servers *sync.Map
 }
 
 func NewClient() *Client {
 	return &Client{
-		Urls: make(map[string]string),
+		Servers: new(sync.Map),
 	}
+}
+
+func (c *Client) Get(label string) (server *config.Server) {
+	if cached, ok := c.Servers.Load(label); ok {
+		server = cached.(*config.Server)
+	} else {
+		server = new(config.Server)
+		c.Servers.Store(label, server)
+	}
+
+	return
 }

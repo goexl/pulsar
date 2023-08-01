@@ -29,6 +29,13 @@ func (s *Send[T]) Key(key string) (send *Send[T]) {
 	return
 }
 
+func (s *Send[T]) Tag(key string) (send *Send[T]) {
+	s.param.Properties[key] = "TAG"
+	send = s
+
+	return
+}
+
 func (s *Send[T]) Property(key string, value string) (send *Send[T]) {
 	s.param.Properties[key] = value
 	send = s

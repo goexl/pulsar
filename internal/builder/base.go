@@ -15,16 +15,24 @@ func NewBase[T any]() *Base[T] {
 	}
 }
 
-func (s *Send[T]) Encoder(encoder serializer.Encoder[T]) (send *Send[T]) {
-	s.param.Encoder = encoder
-	send = s
+func (b *Base[T]) Encoder(encoder serializer.Encoder[T]) (base *Base[T]) {
+	b.param.Encoder = encoder
+	base = b
 
 	return
 }
 
-func (s *Send[T]) Decoder(decoder serializer.Decoder[T]) (send *Send[T]) {
-	s.param.Decoder = decoder
-	send = s
+func (b *Base[T]) Decoder(decoder serializer.Decoder[T]) (base *Base[T]) {
+	b.param.Decoder = decoder
+	base = b
+
+	return
+}
+
+func (b *Base[T]) Serializer(serializer serializer.Serializer[T]) (base *Base[T]) {
+	b.param.Encoder = serializer
+	b.param.Decoder = serializer
+	base = b
 
 	return
 }
