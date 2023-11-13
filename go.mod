@@ -3,7 +3,7 @@ module github.com/goexl/pulsar
 go 1.19
 
 require (
-	github.com/apache/pulsar-client-go v0.11.0
+	github.com/apache/pulsar-client-go v0.11.1
 	github.com/goexl/exc v0.0.5
 	github.com/goexl/gox v0.3.7
 	github.com/goexl/simaqian v0.3.0
