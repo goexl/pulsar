@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/goexl/pulsar/internal/internal/constant"
+	"github.com/goexl/pulsar/internal/internal/core"
 )
 
 type Consumer struct {
@@ -13,6 +14,7 @@ type Consumer struct {
 	Settings   map[string]string
 	Properties map[string]string
 	Max        uint32
+	Type       core.Type
 	Dlq        *Dlq
 }
 
@@ -23,5 +25,6 @@ func NewConsumer() *Consumer {
 		Settings:   make(map[string]string),
 		Properties: make(map[string]string),
 		Max:        10,
+		Type:       core.TypeShared,
 	}
 }

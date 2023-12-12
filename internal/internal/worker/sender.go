@@ -91,6 +91,7 @@ func (s *Sender[T]) create(client pulsar.Client, config *config.Producer) (produ
 	options := pulsar.ProducerOptions{}
 	options.Name = config.Name
 	options.Topic = config.Topic
+	options.DisableBatching = true
 	producer, err = client.CreateProducer(options)
 
 	return

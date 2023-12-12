@@ -11,6 +11,7 @@ import (
 	"github.com/goexl/log"
 	"github.com/goexl/pulsar/internal/callback"
 	"github.com/goexl/pulsar/internal/config"
+	"github.com/goexl/pulsar/internal/internal/core"
 	"github.com/goexl/pulsar/internal/internal/exception"
 	"github.com/goexl/pulsar/internal/internal/param"
 	"github.com/goexl/pulsar/internal/kernel"
@@ -113,6 +114,17 @@ func (h *Handler[T]) create(client pulsar.Client, config *config.Consumer) (cons
 	options.ReceiverQueueSize = config.Size
 	options.Properties = config.Settings
 	options.SubscriptionProperties = config.Properties
+
+	switch config.Type {
+	case core.TypeShared:
+		options.Type = pulsar.Shared
+	case core.TypeExclusive:
+		options.Type = pulsar.Exclusive
+	case core.TypeFailover:
+		options.Type = pulsar.Failover
+	default:
+		options.Type = pulsar.Shared
+	}
 
 	// 死信队列
 	options.DLQ = new(pulsar.DLQPolicy)
