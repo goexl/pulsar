@@ -1,4 +1,8 @@
-package internal
+package param
+
+import (
+	"github.com/goexl/pulsar/internal/internal/constant"
+)
 
 type Connection struct {
 	Label string
@@ -7,7 +11,7 @@ type Connection struct {
 
 func NewConnection() *Connection {
 	return &Connection{
-		Label: DefaultLabel,
+		Label: constant.DefaultLabel,
 	}
 }
 

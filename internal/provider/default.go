@@ -1,10 +1,10 @@
 package provider
 
 import (
-	"github.com/goexl/pulsar/internal/internal"
+	"github.com/goexl/pulsar/internal/internal/core"
 )
 
-var _ internal.Provider = (*Default)(nil)
+var _ core.Provider = (*Default)(nil)
 
 type Default struct {
 	token string

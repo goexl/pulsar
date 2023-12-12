@@ -1,11 +1,11 @@
 package config
 
 import (
-	"github.com/goexl/pulsar/internal/internal"
+	"github.com/goexl/pulsar/internal/internal/core"
 )
 
 type Server struct {
 	Url      string
 	Region   string
-	Provider internal.Provider
+	Provider core.Provider
 }

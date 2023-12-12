@@ -5,9 +5,9 @@ import (
 
 	"github.com/apache/pulsar-client-go/pulsar"
 	"github.com/goexl/gox"
-	"github.com/goexl/pulsar/internal/builder"
 	"github.com/goexl/pulsar/internal/callback"
-	"github.com/goexl/pulsar/internal/param"
+	"github.com/goexl/pulsar/internal/internal/builder"
+	"github.com/goexl/pulsar/internal/internal/param"
 )
 
 type Producer[T any] struct {

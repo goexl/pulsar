@@ -7,8 +7,8 @@ import (
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
 	"github.com/goexl/pulsar/internal/callback"
+	"github.com/goexl/pulsar/internal/internal/param"
 	"github.com/goexl/pulsar/internal/message"
-	"github.com/goexl/pulsar/internal/param"
 	"github.com/goexl/simaqian"
 )
 

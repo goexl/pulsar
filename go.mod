@@ -4,8 +4,8 @@ go 1.19
 
 require (
 	github.com/apache/pulsar-client-go v0.11.1
-	github.com/goexl/exc v0.0.5
-	github.com/goexl/gox v0.3.7
+	github.com/goexl/exception v0.0.1
+	github.com/goexl/gox v0.3.8
 	github.com/goexl/simaqian v0.3.0
 )
 
@@ -22,6 +22,7 @@ require (
 	github.com/dvsekhvalnov/jose2go v1.5.0 // indirect
 	github.com/frankban/quicktest v1.14.5 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
+	github.com/goexl/exc v0.0.5 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect

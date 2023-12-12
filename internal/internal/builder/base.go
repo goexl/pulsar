@@ -1,17 +1,17 @@
 package builder
 
 import (
-	"github.com/goexl/pulsar/internal/internal"
+	"github.com/goexl/pulsar/internal/internal/param"
 	"github.com/goexl/pulsar/internal/serializer"
 )
 
 type Base[T any] struct {
-	param *internal.Base[T]
+	param *param.Base[T]
 }
 
 func NewBase[T any]() *Base[T] {
 	return &Base[T]{
-		param: internal.NewBase[T](),
+		param: param.NewBase[T](),
 	}
 }
 

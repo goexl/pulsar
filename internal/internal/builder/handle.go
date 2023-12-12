@@ -2,7 +2,7 @@ package builder
 
 import (
 	"github.com/goexl/pulsar/internal/callback"
-	"github.com/goexl/pulsar/internal/param"
+	"github.com/goexl/pulsar/internal/internal/param"
 	"github.com/goexl/pulsar/internal/worker"
 )
 

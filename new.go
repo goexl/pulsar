@@ -1,11 +1,11 @@
 package pulsar
 
 import (
-	"github.com/goexl/pulsar/internal/core"
+	"github.com/goexl/pulsar/internal/builder"
 )
 
 var _ = New
 
-func New() *core.Builder {
-	return core.NewBuilder()
+func New() *builder.Client {
+	return builder.NewClient()
 }

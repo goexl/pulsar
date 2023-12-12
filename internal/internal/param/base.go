@@ -1,4 +1,4 @@
-package internal
+package param
 
 import (
 	"github.com/goexl/pulsar/internal/serializer"

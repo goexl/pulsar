@@ -1,12 +1,12 @@
 package param
 
 import (
-	"github.com/goexl/pulsar/internal/internal"
+	"github.com/goexl/pulsar/internal/param"
 )
 
 type Consumer[T any] struct {
-	*internal.Connection
-	*internal.Base[T]
+	*param.Connection
+	*Base[T]
 
 	Topics  []string
 	Pattern string
@@ -14,7 +14,7 @@ type Consumer[T any] struct {
 
 func NewConsumer[T any]() *Consumer[T] {
 	return &Consumer[T]{
-		Connection: internal.NewConnection(),
-		Base:       internal.NewBase[T](),
+		Connection: param.NewConnection(),
+		Base:       NewBase[T](),
 	}
 }
