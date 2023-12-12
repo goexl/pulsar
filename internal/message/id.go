@@ -1,18 +1,17 @@
 package message
 
-import (
-	"github.com/apache/pulsar-client-go/pulsar"
-	"github.com/goexl/gox"
-)
+type Id interface {
+	Serialize() []byte
 
-type Id struct {
-	id pulsar.MessageID
+	Ledger() int64
 
-	_ gox.CannotCopy
-}
+	Entry() int64
 
-func NewId(id pulsar.MessageID) *Id {
-	return &Id{
-		id: id,
-	}
+	Batch() int32
+
+	Partition() int32
+
+	Size() int32
+
+	String() string
 }

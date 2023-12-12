@@ -1,27 +1,25 @@
 package builder
 
 import (
-	"sync"
-
-	"github.com/goexl/pulsar/internal/config"
 	"github.com/goexl/pulsar/internal/internal/constant"
 	"github.com/goexl/pulsar/internal/internal/core"
+	"github.com/goexl/pulsar/internal/param"
 	"github.com/goexl/pulsar/internal/provider"
 )
 
 type Server struct {
-	label   string
-	server  *config.Server
-	servers *sync.Map
-	builder *Client
+	label  string
+	server *param.Server
+	params *param.Client
+	client *Client
 }
 
-func NewServer(servers *sync.Map, builder *Client) *Server {
+func NewServer(params *param.Client, client *Client) *Server {
 	return &Server{
-		label:   constant.DefaultLabel,
-		server:  new(config.Server),
-		servers: servers,
-		builder: builder,
+		label:  constant.DefaultLabel,
+		server: new(param.Server),
+		params: params,
+		client: client,
 	}
 }
 
@@ -60,9 +58,17 @@ func (s *Server) Provider(provider core.Provider) (server *Server) {
 	return
 }
 
+func (s *Server) Consumer() *Consumer {
+	return NewConsumer(s.server, s)
+}
+
+func (s *Server) Producer() *Producer {
+	return NewProducer(s.server, s)
+}
+
 func (s *Server) Build() (builder *Client) {
-	s.servers.Store(s.label, s.servers)
-	builder = s.builder
+	s.params.Servers[s.label] = s.server
+	builder = s.client
 
 	return
 }

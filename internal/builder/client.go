@@ -16,7 +16,7 @@ func NewClient() *Client {
 }
 
 func (c *Client) Server() *Server {
-	return NewServer(c.params.Servers, c)
+	return NewServer(c.params, c)
 }
 
 func (c *Client) Build() *core.Client {

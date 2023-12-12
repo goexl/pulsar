@@ -5,9 +5,7 @@ import (
 	"github.com/goexl/exception"
 	"github.com/goexl/gox"
 	"github.com/goexl/gox/field"
-	"github.com/goexl/pulsar/internal/config"
 	"github.com/goexl/pulsar/internal/internal/builder"
-	"github.com/goexl/pulsar/internal/internal/core"
 	"github.com/goexl/pulsar/internal/param"
 )
 
@@ -17,57 +15,40 @@ type Client struct {
 	_       gox.CannotCopy
 }
 
-func NewClient(param *param.Client) *Client {
+func NewClient(params *param.Client) *Client {
 	return &Client{
 		clients: make(map[string]pulsar.Client),
-		params:  param,
+		params:  params,
 	}
 }
 
-func (c *Client) Server(label string, url string) (client *Client) {
-	c.params.Servers.Store(label, url)
-	client = c
-
-	return
+func (c *Client) Sender() *builder.Sender[any] {
+	return builder.NewSender[any](c.get, c.params.Get, c.params.ProducerProperties)
 }
 
-func (c *Client) Provider(label string, provider core.Provider) (client *Client) {
-	if cached, ok := c.params.Servers.Load(label); ok {
-		cached.(*config.Server).Provider = provider
-	}
-	client = c
-
-	return
+func (c *Client) Handler() *builder.Handler[any] {
+	return builder.NewHandler[any](c.get, c.params.Get, c.params.ConsumerProperties, c.params.Logger)
 }
 
-func (c *Client) Consumer() *builder.Consumer[any] {
-	return builder.NewConsumer[any](c.getClient)
-}
-
-func (c *Client) Producer(topic string) *builder.Producer[any] {
-	return builder.NewProducer[any](topic)
-}
-
-func (c *Client) getClient(connection *param.Connection) (client pulsar.Client, err error) {
-	if cached, ok := c.clients[connection.Key()]; ok {
+func (c *Client) get(label string) (client pulsar.Client, err error) {
+	if cached, ok := c.clients[label]; ok {
 		client = cached.(pulsar.Client)
 	} else {
-		client, err = c.createClient(connection)
+		client, err = c.create(label)
 	}
 
 	return
 }
 
-func (c *Client) createClient(connection *param.Connection) (client pulsar.Client, err error) {
+func (c *Client) create(label string) (client pulsar.Client, err error) {
 	options := pulsar.ClientOptions{}
-	label := connection.Label
-	if url, uok := c.params.Servers.Load(label); !uok {
-		err = exception.New().Message("未能找到连接地址").Field(field.New("label", connection.Label)).Build()
-	} else if provider, pok := c.params.Providers[label]; !pok {
-		err = exception.New().Message("未能找到授权").Field(field.New("label", connection.Label)).Build()
+	if server, uok := c.params.Servers[label]; !uok {
+		err = exception.New().Message("未能找到连接地址").Field(field.New("label", label)).Build()
+	} else if nil == server.Provider {
+		err = exception.New().Message("未能找到授权").Field(field.New("label", label)).Build()
 	} else {
-		options.URL = url
-		options.Authentication = pulsar.NewAuthenticationTokenFromSupplier(provider.Provide)
+		options.URL = server.Url
+		options.Authentication = pulsar.NewAuthenticationTokenFromSupplier(server.Provider.Provide)
 		client, err = pulsar.NewClient(options)
 	}
 

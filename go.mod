@@ -1,12 +1,12 @@
 module github.com/goexl/pulsar
 
-go 1.19
+go 1.21
 
 require (
 	github.com/apache/pulsar-client-go v0.11.1
 	github.com/goexl/exception v0.0.1
 	github.com/goexl/gox v0.3.8
-	github.com/goexl/simaqian v0.3.0
+	github.com/goexl/log v0.0.5
 )
 
 require (
@@ -22,7 +22,6 @@ require (
 	github.com/dvsekhvalnov/jose2go v1.5.0 // indirect
 	github.com/frankban/quicktest v1.14.5 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
-	github.com/goexl/exc v0.0.5 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -40,8 +39,6 @@ require (
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
-	go.uber.org/multierr v1.11.0 // indirect
-	go.uber.org/zap v1.26.0 // indirect
 	golang.org/x/mod v0.12.0 // indirect
 	golang.org/x/net v0.12.0 // indirect
 	golang.org/x/oauth2 v0.10.0 // indirect
