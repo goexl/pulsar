@@ -6,7 +6,7 @@ toolchain go1.24.1
 
 require (
 	github.com/apache/pulsar-client-go v0.15.0
-	github.com/goexl/exception v0.0.3
+	github.com/goexl/exception v0.0.4
 	github.com/goexl/gox v1.9.2
 	github.com/goexl/log v0.1.0
 )
